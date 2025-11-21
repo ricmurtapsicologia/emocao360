@@ -76,6 +76,7 @@
       --stroke-wheel: #020617;
     }
 
+    /* Tema claro – sobrescreve variáveis */
     body[data-theme="light"] {
       color-scheme: light;
       --bg: #f3f4f6;
@@ -112,99 +113,11 @@
       flex-direction: column;
     }
 
-    [hidden] {
-      display: none !important;
-    }
-
-    /* Onboarding */
-
-    .onboarding-overlay {
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(circle at top, rgba(15,23,42,0.96) 0, rgba(2,6,23,0.98) 50%, rgba(0,0,0,0.96) 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 40;
-      padding: 1rem;
-    }
-
-    body[data-theme="light"] .onboarding-overlay {
-      background: radial-gradient(circle at top, rgba(243,244,246,0.98) 0, rgba(229,231,235,0.98) 50%, rgba(209,213,219,0.98) 100%);
-    }
-
-    .onboarding-dialog {
-      max-width: 520px;
-      width: 100%;
-      background: var(--bg-card);
-      border-radius: var(--radius-xl);
-      border: 1px solid var(--border-subtle);
-      box-shadow: var(--shadow-soft);
-      padding: 1.3rem 1.4rem 1.2rem;
-      color: var(--text-main);
-    }
-
-    body[data-theme="light"] .onboarding-dialog {
-      background: #ffffff;
-    }
-
-    .onboarding-title {
-      margin: 0 0 0.4rem;
-      font-size: 1.25rem;
-      font-weight: 600;
-    }
-
-    .onboarding-subtitle {
-      margin: 0 0 0.7rem;
-      font-size: 0.9rem;
-      color: var(--text-soft);
-    }
-
-    .onboarding-steps {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 0.9rem;
-      font-size: 0.9rem;
-      color: var(--text-main);
-    }
-
-    .onboarding-steps li {
-      display: flex;
-      gap: 0.5rem;
-      margin-bottom: 0.4rem;
-    }
-
-    .onboarding-bullet {
-      width: 1.4rem;
-      height: 1.4rem;
-      border-radius: 999px;
-      background: rgba(249,115,22,0.16);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.8rem;
-      color: var(--accent);
-      flex-shrink: 0;
-    }
-
-    .onboarding-footer {
-      display: flex;
-      justify-content: flex-end;
-      gap: 0.5rem;
-      margin-top: 0.4rem;
-    }
-
-    .onboarding-note {
-      font-size: 0.8rem;
-      color: var(--text-soft);
-      margin-top: 0.2rem;
-    }
-
-    /* Cabeçalho */
+    /* Cabeçalho – mobile first */
 
     .app-header {
       border-bottom: 1px solid #111827;
-      padding: 0.9rem 1.5rem 0.8rem;
+      padding: 0.7rem 1rem 0.6rem;
       background: rgba(2, 6, 23, 0.96);
       color: #e5e7eb;
       backdrop-filter: blur(10px);
@@ -223,15 +136,15 @@
       max-width: 1200px;
       margin: 0 auto;
       display: flex;
-      gap: 1rem;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 0.4rem;
+      align-items: flex-start;
+      justify-content: flex-start;
     }
 
     .brand {
-      margin: 0 0 0.1rem;
-      font-size: 0.8rem;
+      margin: 0;
+      font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 0.12em;
       color: var(--text-soft);
@@ -239,13 +152,13 @@
 
     .app-title {
       margin: 0;
-      font-size: 1.6rem;
+      font-size: 1.35rem;
       font-weight: 700;
     }
 
     .app-subtitle {
-      margin: 0.35rem 0 0;
-      font-size: 0.9rem;
+      margin: 0.25rem 0 0;
+      font-size: 0.86rem;
       color: var(--text-muted);
       max-width: 540px;
     }
@@ -253,19 +166,19 @@
     .nav-links {
       list-style: none;
       display: flex;
-      gap: 0.6rem;
-      margin: 0;
-      padding: 0;
-      font-size: 0.85rem;
-      align-items: center;
       flex-wrap: wrap;
-      justify-content: flex-end;
+      gap: 0.5rem;
+      margin: 0.4rem 0 0;
+      padding: 0;
+      font-size: 0.8rem;
+      align-items: center;
+      justify-content: flex-start;
     }
 
     .nav-links a {
       color: var(--text-soft);
       text-decoration: none;
-      padding: 0.35rem 0.6rem;
+      padding: 0.3rem 0.6rem;
       border-radius: 999px;
       transition: background-color 0.12s ease, color 0.12s ease;
     }
@@ -289,7 +202,7 @@
       background: rgba(15, 23, 42, 0.9);
       color: #f9fafb;
       cursor: pointer;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       display: inline-flex;
       align-items: center;
       gap: 0.3rem;
@@ -316,16 +229,16 @@
       box-shadow: var(--focus-ring);
     }
 
-    /* Layout principal */
+    /* Layout principal – MOBILE FIRST */
 
     .layout {
       max-width: 1200px;
-      margin: 1.2rem auto 1.8rem;
-      padding: 0 1.5rem;
+      margin: 1rem auto 1.5rem;
+      padding: 0 1rem;
       display: grid;
-      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1.75fr);
-      grid-template-rows: auto auto;
-      gap: 1.3rem;
+      grid-template-columns: minmax(0, 1fr);
+      grid-auto-rows: auto;
+      gap: 1rem;
     }
 
     .panel {
@@ -333,7 +246,7 @@
       border-radius: var(--radius-xl);
       border: 1px solid var(--border-subtle);
       box-shadow: var(--shadow-soft);
-      padding: 1.1rem 1.2rem 1.2rem;
+      padding: 0.9rem 0.9rem 1rem;
       min-height: 0;
     }
 
@@ -342,61 +255,57 @@
     }
 
     .panel-wheel {
-      grid-row: 1 / 3;
+      order: 0;
+    }
+
+    .panel-details {
+      order: 1;
     }
 
     .panel-history {
-      grid-column: 1 / 3;
+      order: 2;
     }
 
     .panel-header {
-      margin-bottom: 0.8rem;
+      margin-bottom: 0.7rem;
     }
 
     .section-title {
       margin: 0 0 0.15rem;
-      font-size: 1.15rem;
+      font-size: 1.05rem;
       font-weight: 600;
     }
 
     .section-subtitle {
       margin: 0;
-      font-size: 0.86rem;
+      font-size: 0.82rem;
       color: var(--text-soft);
     }
 
-    /* Roda de emoções */
+    /* Roda de emoções (flor SVG) – centralizada e grande no mobile */
 
     .wheel-wrapper {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 0.6rem 0 0.9rem;
-      max-width: 560px;
+      padding: 0.4rem 0 0.7rem;
+      max-width: 360px;
       margin: 0 auto;
-    }
-
-    /* NOVO: container com aspect-ratio garante altura em mobile */
-    .wheel-container {
-      width: 100%;
-      max-width: 480px;
-      aspect-ratio: 1 / 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      text-align: center;
     }
 
     .emotion-wheel {
       width: 100%;
-      height: 100%;
+      max-width: 360px;
+      height: auto;
       display: block;
-      min-height: 260px; /* garante que não colapse em algumas telas menores */
+      margin-bottom: 0.45rem;
     }
 
     .wheel-help {
-      margin: 0.4rem 0 0;
-      font-size: 0.82rem;
+      margin: 0;
+      font-size: 0.8rem;
       color: var(--text-soft);
       text-align: center;
     }
@@ -421,16 +330,12 @@
     }
 
     .wheel-label {
-      font-size: 9px;
+      font-size: 11px; /* maior para mobile */
       font-weight: 600;
       fill: var(--stroke-wheel);
       text-anchor: middle;
       pointer-events: none;
       user-select: none;
-    }
-
-    body[data-theme="dark"] .wheel-label {
-      fill: #020617;
     }
 
     .wheel-dotted-circle {
@@ -446,13 +351,12 @@
       background: radial-gradient(circle at top left, #111827 0, var(--bg-card) 50%);
       border-radius: var(--radius-lg);
       border: 1px solid #1f2937;
-      padding: 0.9rem;
-      margin-bottom: 0.8rem;
+      padding: 0.8rem;
+      margin-bottom: 0.7rem;
       min-height: 180px;
     }
 
     body[data-theme="light"] .details-card {
-      background: #ffffff;
       border-color: #d1d5db;
     }
 
@@ -463,19 +367,19 @@
     }
 
     .details-emotion-name {
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       font-weight: 600;
       margin: 0 0 0.3rem;
     }
 
     .details-emotion-meta {
       margin: 0 0 0.3rem;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       color: var(--text-soft);
     }
 
     .details-block {
-      margin: 0.25rem 0;
+      margin: 0.2rem 0;
       font-size: 0.9rem;
       color: var(--text-main);
     }
@@ -488,7 +392,7 @@
     .details-list {
       margin: 0.1rem 0 0.25rem 1.1rem;
       padding: 0;
-      font-size: 0.86rem;
+      font-size: 0.84rem;
       color: var(--text-muted);
     }
 
@@ -502,8 +406,8 @@
 
     .form-row-inline {
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.7rem;
+      flex-direction: column;
+      gap: 0.6rem;
     }
 
     .form-group {
@@ -512,7 +416,7 @@
 
     .form-label {
       display: block;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       color: var(--text-muted);
       margin-bottom: 0.18rem;
     }
@@ -559,19 +463,18 @@
     .form-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.6rem;
+      gap: 0.5rem;
       align-items: center;
       justify-content: flex-end;
-      margin-top: 0.3rem;
+      margin-top: 0.2rem;
     }
 
     .btn-primary,
     .btn-secondary,
-    .btn-ghost,
-    .btn-text {
+    .btn-ghost {
       border-radius: 999px;
-      padding: 0.55rem 1.2rem;
-      font-size: 0.9rem;
+      padding: 0.5rem 1.1rem;
+      font-size: 0.88rem;
       font-weight: 500;
       border: none;
       cursor: pointer;
@@ -617,52 +520,40 @@
       border-color: #9ca3af;
     }
 
-    .btn-text {
-      background: transparent;
-      color: var(--text-soft);
-      border-radius: 999px;
-      border: none;
-      padding: 0.25rem 0.6rem;
-      font-size: 0.8rem;
-    }
-
     .btn-primary:hover:not(:disabled),
     .btn-secondary:hover,
-    .btn-ghost:hover,
-    .btn-text:hover {
+    .btn-ghost:hover {
       transform: translateY(-1px);
       box-shadow: 0 18px 40px rgba(0, 0, 0, 0.65);
     }
 
     .btn-primary:active:not(:disabled),
     .btn-secondary:active,
-    .btn-ghost:active,
-    .btn-text:active {
+    .btn-ghost:active {
       transform: translateY(0);
       box-shadow: 0 8px 22px rgba(0, 0, 0, 0.7);
     }
 
     .btn-primary:focus-visible,
     .btn-secondary:focus-visible,
-    .btn-ghost:focus-visible,
-    .btn-text:focus-visible {
+    .btn-ghost:focus-visible {
       outline: none;
       box-shadow: var(--focus-ring);
     }
 
     .helper-text {
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       color: var(--text-soft);
-      margin-top: 0.15rem;
+      margin-top: 0.1rem;
     }
 
     /* Gráficos e histórico */
 
     .charts-wrapper {
       display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.7fr);
-      gap: 0.75rem;
-      margin-bottom: 0.75rem;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.7rem;
+      margin-bottom: 0.5rem;
     }
 
     .chart-card,
@@ -670,7 +561,7 @@
       background: rgba(2, 6, 23, 0.96);
       border-radius: var(--radius-lg);
       border: 1px solid #1f2937;
-      padding: 0.7rem 0.8rem;
+      padding: 0.65rem 0.75rem;
     }
 
     body[data-theme="light"] .chart-card,
@@ -680,25 +571,25 @@
     }
 
     .history-card {
-      padding-bottom: 0.9rem;
+      padding-bottom: 0.8rem;
     }
 
     .chart-title,
     .history-title {
-      margin: 0 0 0.3rem;
-      font-size: 0.95rem;
+      margin: 0 0 0.25rem;
+      font-size: 0.9rem;
     }
 
     .chart-helper,
     .history-help {
-      margin: 0 0 0.35rem;
-      font-size: 0.8rem;
+      margin: 0 0 0.3rem;
+      font-size: 0.78rem;
       color: var(--text-soft);
     }
 
     .history-table-wrapper {
-      margin-top: 0.4rem;
-      max-height: 260px;
+      margin-top: 0.35rem;
+      max-height: 240px;
       overflow: auto;
       border-radius: var(--radius-md);
       border: 1px solid #1f2937;
@@ -713,12 +604,12 @@
     .history-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
     }
 
     .history-table th,
     .history-table td {
-      padding: 0.32rem 0.4rem;
+      padding: 0.28rem 0.4rem;
       border-bottom: 1px solid rgba(31, 41, 55, 0.85);
       text-align: left;
     }
@@ -751,9 +642,9 @@
     }
 
     .history-empty {
-      margin: 0.4rem 0;
-      padding: 0 0.5rem 0.5rem;
-      font-size: 0.8rem;
+      margin: 0.35rem 0;
+      padding: 0 0.5rem 0.4rem;
+      font-size: 0.78rem;
       color: var(--text-soft);
     }
 
@@ -761,18 +652,17 @@
       display: flex;
       justify-content: flex-end;
       gap: 0.4rem;
-      margin-top: 0.25rem;
+      margin-top: 0.2rem;
     }
 
     /* Sobre */
 
     .panel-about {
-      margin-top: 0.2rem;
-      grid-column: 1 / 3;
+      margin-top: 0.1rem;
     }
 
     .about-content {
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       color: var(--text-muted);
     }
 
@@ -780,12 +670,12 @@
       padding-left: 1rem;
     }
 
-    /* Rodapé */
+    /* Rodapé – menos espaço entre linhas */
 
     .app-footer {
       margin-top: auto;
-      padding: 0.9rem 1.5rem 1.1rem;
-      font-size: 0.8rem;
+      padding: 0.6rem 1rem 0.8rem;
+      font-size: 0.78rem;
       color: var(--text-soft);
       border-top: 1px solid #111827;
       background: radial-gradient(circle at top, rgba(15,23,42,0.9) 0, #020617 50%, #000 100%);
@@ -801,19 +691,23 @@
       max-width: 1200px;
       margin: 0 auto;
       display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      gap: 0.6rem;
-      text-align: center;
       flex-direction: column;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.3rem;
+      text-align: left;
     }
 
     .footer-main {
       display: flex;
       flex-direction: column;
-      gap: 0.2rem;
-      align-items: center;
+      gap: 0.1rem;
+    }
+
+    .footer-main p {
+      margin: 0.1rem 0;
+      line-height: 1.25; /* menos espaçado */
     }
 
     .footer-main strong {
@@ -821,13 +715,13 @@
     }
 
     .footer-tagline {
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       opacity: 0.9;
     }
 
     .footer-badge {
-      font-size: 0.72rem;
-      padding: 0.25rem 0.6rem;
+      font-size: 0.7rem;
+      padding: 0.22rem 0.6rem;
       border-radius: 999px;
       border: 1px solid rgba(249, 115, 22, 0.4);
       background: rgba(15, 23, 42, 0.8);
@@ -836,6 +730,7 @@
       align-items: center;
       gap: 0.25rem;
       white-space: nowrap;
+      margin-top: 0.1rem;
     }
 
     body[data-theme="light"] .footer-badge {
@@ -844,147 +739,78 @@
       border-color: #fed7aa;
     }
 
+    /* Acessibilidade */
+
     [role="button"],
     svg [tabindex="0"] {
       cursor: pointer;
     }
 
-    /* Responsividade */
+    /* RESPONSIVIDADE – telas maiores */
 
-    @media (max-width: 1024px) {
+    @media (min-width: 768px) {
       .layout {
-        grid-template-columns: minmax(0, 1fr);
-        grid-template-rows: auto auto auto;
-      }
-
-      .panel-wheel {
-        grid-row: auto;
-      }
-
-      .panel-history {
-        grid-column: auto;
-      }
-
-      .header-inner {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .nav-links {
-        margin-top: 0.4rem;
-        justify-content: flex-start;
-      }
-
-      .charts-wrapper {
-        grid-template-columns: minmax(0, 1fr);
+        padding: 0 1.2rem;
       }
 
       .wheel-wrapper {
-        max-width: 520px;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .layout {
-        padding: 0 1rem;
+        max-width: 420px;
       }
 
-      .app-header {
-        padding-inline: 1rem;
+      .emotion-wheel {
+        max-width: 420px;
       }
 
-      .app-footer {
-        padding-inline: 1rem;
-      }
-
-      .panel {
-        padding: 0.9rem;
-      }
-
-      .app-title {
-        font-size: 1.35rem;
-      }
-
-      .app-subtitle {
-        font-size: 0.86rem;
-      }
-
-      .header-inner {
-        gap: 0.5rem;
-      }
-
-      .wheel-wrapper {
-        padding-top: 0.2rem;
-      }
-
-      .wheel-container {
-        max-width: 380px;
-      }
-
-      .wheel-label {
-        font-size: 8px;
+      .form-row-inline {
+        flex-direction: row;
       }
 
       .footer-inner {
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
-        text-align: center;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .layout {
+        padding: 0 1.5rem;
+        grid-template-columns: minmax(0, 1.25fr) minmax(0, 1.75fr);
+        grid-template-rows: auto auto;
+        gap: 1.3rem;
+      }
+
+      .panel-wheel {
+        grid-row: 1 / 3;
+      }
+
+      .panel-history {
+        grid-column: 1 / 3;
+      }
+
+      .header-inner {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .nav-links {
+        margin-top: 0;
+        justify-content: flex-end;
+      }
+
+      .charts-wrapper {
+        grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.7fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .wheel-label {
+        font-size: 13px; /* ainda maior em celulares bem pequenos */
       }
     }
   </style>
 </head>
 <body>
-  <!-- Onboarding / Como usar -->
-  <div
-    id="onboardingOverlay"
-    class="onboarding-overlay"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="onboardingTitle"
-    aria-describedby="onboardingSubtitle"
-    hidden>
-    <div class="onboarding-dialog">
-      <h2 id="onboardingTitle" class="onboarding-title">Como usar a Roda das Emoções</h2>
-      <p id="onboardingSubtitle" class="onboarding-subtitle">
-        Esta ferramenta foi criada para te ajudar a reconhecer, entender e registrar suas emoções de forma segura e organizada.
-      </p>
-      <ul class="onboarding-steps">
-        <li>
-          <span class="onboarding-bullet">1</span>
-          <div>
-            <strong>Escolha uma emoção na roda.</strong><br>
-            Clique em uma pétala ou combinação para ver o nome e o significado daquela emoção.
-          </div>
-        </li>
-        <li>
-          <span class="onboarding-bullet">2</span>
-          <div>
-            <strong>Leia a explicação psicoeducativa.</strong><br>
-            Veja para que serve essa emoção, em quais situações costuma aparecer e quais são os riscos quando ela não é bem manejada.
-          </div>
-        </li>
-        <li>
-          <span class="onboarding-bullet">3</span>
-          <div>
-            <strong>Registre a situação.</strong><br>
-            Preencha o contexto, gatilhos e comportamentos. Depois, use o PDF ou o WhatsApp para conversar em sessão ou compartilhar com alguém de confiança.
-          </div>
-        </li>
-      </ul>
-      <p class="onboarding-note">
-        Esta ferramenta não substitui serviços de emergência. Em situações de risco imediato, procure ajuda presencial ou ligue para serviços oficiais de crise.
-      </p>
-      <div class="onboarding-footer">
-        <button type="button" class="btn-ghost" id="onboardingLaterButton">
-          Ver mais tarde
-        </button>
-        <button type="button" class="btn-primary" id="onboardingStartButton">
-          Entendi, começar
-        </button>
-      </div>
-    </div>
-  </div>
-
   <header class="app-header">
     <div class="header-inner">
       <div>
@@ -1000,11 +826,6 @@
           <li><a href="#sec-registro">Registro</a></li>
           <li><a href="#sec-graficos">Histórico</a></li>
           <li><a href="#sec-sobre">Sobre</a></li>
-          <li>
-            <button type="button" class="btn-text" id="howToUseButton">
-              Como usar
-            </button>
-          </li>
           <li>
             <button type="button" class="btn-theme-toggle" id="themeToggle">
               <span id="themeIcon">🌙</span>
@@ -1027,16 +848,13 @@
       </header>
 
       <div class="wheel-wrapper" aria-live="polite">
-        <!-- NOVO: container para garantir proporção e altura -->
-        <div class="wheel-container">
-          <svg
-            id="emotionWheel"
-            class="emotion-wheel"
-            viewBox="-190 -190 380 380"
-            role="img"
-            aria-label="Roda das Emoções de Plutchik com intensidades e combinações">
-          </svg>
-        </div>
+        <svg
+          id="emotionWheel"
+          class="emotion-wheel"
+          viewBox="-180 -180 360 360"
+          role="img"
+          aria-label="Roda das Emoções de Plutchik com intensidades e combinações">
+        </svg>
         <p class="wheel-help">
           Clique em qualquer pétala ou combinação para explorar a emoção e registrar sua experiência.
         </p>
@@ -1112,19 +930,12 @@
         </div>
 
         <p class="helper-text">
-          Este registro é guardado apenas neste dispositivo. Você pode gerar um PDF ou enviar um resumo pelo WhatsApp
-          para conversar em sessão. Em caso de urgência ou risco imediato, procure serviços de emergência presenciais.
+          Este registro é para uso pessoal e para ser compartilhado em sessão. Nada é enviado automaticamente a servidores.
         </p>
 
         <div class="form-actions">
-          <button type="button" class="btn-ghost" id="shareWhatsappButton">
-            Compartilhar registro via WhatsApp
-          </button>
-          <button type="button" class="btn-ghost" id="sharePageButton">
-            Compartilhar página (WhatsApp)
-          </button>
-          <button type="button" class="btn-secondary" id="sendPsychologistWhatsappButton">
-            Falar com meu psicólogo
+          <button type="button" class="btn-ghost" id="sendWhatsappButton">
+            Enviar resumo ao psicólogo
           </button>
           <button type="button" class="btn-secondary" id="downloadPdfButton">
             Baixar PDF do meu registro
@@ -1231,7 +1042,7 @@
       </div>
       <div>
         <span class="footer-badge">
-          🧠 Treino de Habilidades Emocionais
+          🧠 Treino de habilidades emocionais
         </span>
       </div>
     </div>
@@ -1239,6 +1050,10 @@
 
   <script>
     "use strict";
+
+    /* ------------------------------------------------------------------
+       Configuração de emoções e diades
+       ------------------------------------------------------------------ */
 
     const PRIMARIES = [
       { key: "joy", label: "Alegria", angle: -90,    colors: "#ffd54a" },
@@ -1316,11 +1131,793 @@
       anticipation: "Antecipação"
     };
 
-    const INFO_MAP = { /* === TODO: MESMO BLOCO INFO_MAP COMPLETO QUE VOCÊ JÁ TINHA AQUI === */
-      /* para caber na resposta, não repeti tudo; no seu arquivo final, mantenha o INFO_MAP
-         exatamente como estava no código que você enviou (sem alterações) */
-      /* ... cole aqui o mesmo INFO_MAP inteiro da sua versão anterior ... */
+    /* ------------------------------------------------------------------
+       Psicoeducação – INFO_MAP
+       ------------------------------------------------------------------ */
+
+    const INFO_MAP = {
+      /* ALEGRIA */
+      joy_high: {
+        displayName: "Êxtase",
+        primary: "joy",
+        type: "primary",
+        ring: "high",
+        definition: "Alegria em nível muito alto, com euforia e sensação de celebração intensa.",
+        adaptive: "Marcar conquistas importantes e liberar energia para comemorar.",
+        situations: [
+          "Alcançar um objetivo de longa data.",
+          "Viver experiências únicas, como formaturas, casamentos ou vitórias marcantes."
+        ],
+        risks: [
+          "Tomar decisões impulsivas no auge da euforia.",
+          "Comparar o cotidiano com o momento de êxtase e sentir frustração depois."
+        ],
+        strategies: [
+          "Adiar decisões importantes para algumas horas depois da intensa euforia.",
+          "Registrar o que este momento revela sobre seus valores e esforços."
+        ],
+        reflections: [
+          "Que compromisso quero assumir comigo após esta conquista?",
+          "Como posso celebrar sem agredir meus próprios limites?"
+        ]
+      },
+      joy_mid: {
+        displayName: "Alegria",
+        primary: "joy",
+        type: "primary",
+        ring: "mid",
+        definition: "Estado de satisfação e bem-estar ao vivenciar algo positivo e significativo.",
+        adaptive: "Reforçar comportamentos saudáveis e aproximar de pessoas e atividades valiosas.",
+        situations: [
+          "Compartilhar boas notícias com alguém importante.",
+          "Desfrutar de momentos de lazer e conexão afetiva."
+        ],
+        risks: [
+          "Ignorar emoções difíceis para parecer sempre alegre.",
+          "Usar apenas prazer imediato como critério para decisões."
+        ],
+        strategies: [
+          "Dividir a alegria com alguém de confiança, sem comparação.",
+          "Aproveitar a energia da alegria para iniciar hábitos saudáveis."
+        ],
+        reflections: [
+          "O que, além do prazer, torna esta situação cheia de sentido?",
+          "Como posso cuidar para que esta alegria não vire autoexigência?"
+        ]
+      },
+      joy_low: {
+        displayName: "Serenidade",
+        primary: "joy",
+        type: "primary",
+        ring: "low",
+        definition: "Calma suave, sensação de tranquilidade e conforto, sem grande excitação.",
+        adaptive: "Permitir descanso, recuperação e apreciação de momentos simples.",
+        situations: [
+          "Fim de um dia produtivo com tempo para desacelerar.",
+          "Estar em local seguro, fazendo algo que traz paz."
+        ],
+        risks: [
+          "Adiar mudanças necessárias por estar confortável demais.",
+          "Minimizar necessidades emocionais para não desestabilizar a calma."
+        ],
+        strategies: [
+          "Notar sensações corporais de relaxamento e segurança.",
+          "Usar a serenidade para refletir com clareza sobre próximos passos."
+        ],
+        reflections: [
+          "Do que esta calma está me protegendo?",
+          "Que pequena ação posso planejar a partir desta serenidade?"
+        ]
+      },
+
+      /* CONFIANÇA */
+      trust_high: {
+        displayName: "Admiração",
+        primary: "trust",
+        type: "primary",
+        ring: "high",
+        definition: "Confiança intensa misturada com respeito e inspiração por alguém ou algo.",
+        adaptive: "Oferecer modelos de crescimento e motivar desenvolvimento pessoal.",
+        situations: [
+          "Observar alguém enfrentando dificuldades com integridade.",
+          "Estudar pessoas que representam valores que você deseja cultivar."
+        ],
+        risks: [
+          "Idealizar o outro e sentir-se sempre menor.",
+          "Copiar comportamentos sem considerar seus próprios limites."
+        ],
+        strategies: [
+          "Identificar quais qualidades admiráveis você já possui em algum grau.",
+          "Transformar admiração em metas concretas, pequenas e realistas."
+        ],
+        reflections: [
+          "O que exatamente admiro e como isso conversa com meus valores?",
+          "Como posso aprender com esta pessoa sem me apagar?"
+        ]
+      },
+      trust_mid: {
+        displayName: "Confiança",
+        primary: "trust",
+        type: "primary",
+        ring: "mid",
+        definition: "Sensação de segurança em relação a alguém, a si mesmo ou a uma situação.",
+        adaptive: "Permitir cooperação, delegação e construção de vínculos estáveis.",
+        situations: [
+          "Parcerias em que os combinados são cumpridos.",
+          "Relacionamentos nos quais segredos são respeitados."
+        ],
+        risks: [
+          "Acreditar demais em pessoas pouco confiáveis.",
+          "Fechar os olhos para sinais de desrespeito por medo de perder segurança."
+        ],
+        strategies: [
+          "Estabelecer limites claros e revisá-los quando necessário.",
+          "Observar se você também se comporta de forma confiável."
+        ],
+        reflections: [
+          "Que limites saudáveis podem proteger essa confiança?",
+          "O quanto confio em mim para sustentar minhas escolhas?"
+        ]
+      },
+      trust_low: {
+        displayName: "Aprovação",
+        primary: "trust",
+        type: "primary",
+        ring: "low",
+        definition: "Sensação de ser aceito, reconhecido ou validado por outra pessoa ou grupo.",
+        adaptive: "Fortalecer vínculos e facilitar cooperação em ambientes seguros.",
+        situations: [
+          "Receber feedback respeitoso sobre o seu trabalho.",
+          "Ser incluído em decisões importantes."
+        ],
+        risks: [
+          "Depender da aprovação externa para se sentir suficiente.",
+          "Evitar conversas difíceis para não decepcionar o outro."
+        ],
+        strategies: [
+          "Reconhecer internamente as próprias qualidades, além do elogio.",
+          "Equilibrar o desejo de agradar com seus valores pessoais."
+        ],
+        reflections: [
+          "Em quais áreas tenho buscado apenas aprovação externa?",
+          "Que tipo de autoaprovação quero construir?"
+        ]
+      },
+
+      /* MEDO */
+      fear_high: {
+        displayName: "Terror",
+        primary: "fear",
+        type: "primary",
+        ring: "high",
+        definition: "Medo extremo, com sensação de ameaça grave e perda de controle.",
+        adaptive: "Ativar resposta de emergência quando a integridade está em risco real.",
+        situations: [
+          "Acidentes, violência ou situações traumáticas.",
+          "Crises intensas de pânico."
+        ],
+        risks: [
+          "Generalizar o terror para contextos seguros.",
+          "Evitar ajuda por medo de reviver lembranças."
+        ],
+        strategies: [
+          "Buscar ancoragem no presente com estímulos seguros (contato visual, tato, respiração).",
+          "Procurar ajuda profissional para trabalhar experiências traumáticas."
+        ],
+        reflections: [
+          "Que recursos tenho hoje que não tinha em momentos passados?",
+          "Quem pode caminhar comigo neste processo de reconstrução?"
+        ]
+      },
+      fear_mid: {
+        displayName: "Medo",
+        primary: "fear",
+        type: "primary",
+        ring: "mid",
+        definition: "Resposta a ameaça percebida, preparando o corpo para proteção.",
+        adaptive: "Proteger sua integridade física e emocional, evitando perigos reais.",
+        situations: [
+          "Contextos de instabilidade ou riscos concretos.",
+          "Medo de rejeição, perda de vínculo ou fracasso relevante."
+        ],
+        risks: [
+          "Evitar cronicamente situações essenciais para seus objetivos.",
+          "Ignorar riscos reais por tentar não sentir medo algum."
+        ],
+        strategies: [
+          "Distinguir perigos reais de possibilidades imaginadas.",
+          "Enfrentar gradualmente situações importantes, com plano e apoio."
+        ],
+        reflections: [
+          "O que este medo revela sobre o que é valioso para mim?",
+          "Em qual ponto o medo me protege e em qual ponto me paralisa?"
+        ]
+      },
+      fear_low: {
+        displayName: "Apreensão",
+        primary: "fear",
+        type: "primary",
+        ring: "low",
+        definition: "Preocupação leve com algo que pode dar errado, mas ainda incerto.",
+        adaptive: "Alertar sobre possíveis riscos e incentivar preparação antecipada.",
+        situations: [
+          "Esperar resultados de provas, exames ou entrevistas.",
+          "Iniciar atividades novas ainda desconhecidas."
+        ],
+        risks: [
+          "Transformar apreensão em ruminação sem ação.",
+          "Confundir possibilidade com certeza de desastre."
+        ],
+        strategies: [
+          "Listar o que está sob seu controle e agir sobre isso.",
+          "Definir um pequeno primeiro passo ao invés de tentar resolver tudo."
+        ],
+        reflections: [
+          "Que parte desta apreensão é fato e qual é hipótese?",
+          "Que atitude realista posso tomar hoje?"
+        ]
+      },
+
+      /* SURPRESA */
+      surprise_high: {
+        displayName: "Assombro",
+        primary: "surprise",
+        type: "primary",
+        ring: "high",
+        definition: "Surpresa intensa diante de algo muito diferente do esperado.",
+        adaptive: "Forçar reavaliação rápida de crenças e expectativas.",
+        situations: [
+          "Impactos positivos ou negativos muito acima do previsto.",
+          "Descobertas que mudam sua visão de mundo."
+        ],
+        risks: [
+          "Congelar e não conseguir agir diante da novidade.",
+          "Criar conclusões extremas com base em um único evento."
+        ],
+        strategies: [
+          "Buscar mais informações antes de decidir.",
+          "Conversar com alguém de confiança para organizar o impacto."
+        ],
+        reflections: [
+          "Que visão minha está sendo convidada a amadurecer?",
+          "O que posso aprender com esse assombro sem negar meu susto?"
+        ]
+      },
+      surprise_mid: {
+        displayName: "Surpresa",
+        primary: "surprise",
+        type: "primary",
+        ring: "mid",
+        definition: "Quebra de expectativa por algo inesperado.",
+        adaptive: "Interromper o piloto automático e reavaliar a situação.",
+        situations: [
+          "Mudanças de agenda de última hora.",
+          "Receber notícias que não estavam no radar."
+        ],
+        risks: [
+          "Responder impulsivamente antes de entender o contexto.",
+          "Tratar qualquer mudança como ameaça."
+        ],
+        strategies: [
+          "Dar um tempo antes de tomar decisões.",
+          "Perguntar, investigar e esclarecer antes de concluir."
+        ],
+        reflections: [
+          "Esta surpresa abre alguma oportunidade de crescimento?",
+          "O que ainda preciso compreender melhor aqui?"
+        ]
+      },
+      surprise_low: {
+        displayName: "Distração",
+        primary: "surprise",
+        type: "primary",
+        ring: "low",
+        definition: "Desvio leve de atenção por estímulos novos e constantes.",
+        adaptive: "Redirecionar o foco para algo que pode ser mais relevante.",
+        situations: [
+          "Notificações frequentes em dispositivos.",
+          "Interrupções leves durante o trabalho."
+        ],
+        risks: [
+          "Fragmentar a atenção e perder profundidade nas tarefas.",
+          "Confundir urgência com importância real."
+        ],
+        strategies: [
+          "Definir janelas específicas para checar notificações.",
+          "Praticar períodos curtos de foco total em uma única tarefa."
+        ],
+        reflections: [
+          "O que realmente merece minha atenção agora?",
+          "Que limite simples posso testar para proteger meu foco?"
+        ]
+      },
+
+      /* TRISTEZA */
+      sadness_high: {
+        displayName: "Angústia",
+        primary: "sadness",
+        type: "primary",
+        ring: "high",
+        definition: "Tristeza profunda misturada a aperto interno e sensação de peso.",
+        adaptive: "Sinalizar que algo muito importante foi ferido ou perdido.",
+        situations: [
+          "Luto por pessoas, relações ou projetos.",
+          "Acúmulo de frustrações significativas."
+        ],
+        risks: [
+          "Perder a esperança e deixar de buscar ajuda.",
+          "Confundir angústia com identidade permanente."
+        ],
+        strategies: [
+          "Procurar apoio profissional e rede de confiança.",
+          "Fatiar tarefas em passos mínimos, respeitando o ritmo do momento."
+        ],
+        reflections: [
+          "Que partes de mim pedem acolhimento, não julgamento?",
+          "Qual pequeno gesto de cuidado é possível hoje?"
+        ]
+      },
+      sadness_mid: {
+        displayName: "Tristeza",
+        primary: "sadness",
+        type: "primary",
+        ring: "mid",
+        definition: "Resposta a perdas, frustrações ou afastamentos importantes.",
+        adaptive: "Favorecer recolhimento, elaboração e busca de apoio.",
+        situations: [
+          "Fim de ciclos ou relações significativas.",
+          "Percepção de que algo esperado não aconteceu."
+        ],
+        risks: [
+          "Isolamento prolongado e abandono de rotinas necessárias.",
+          "Tratar tristeza como sinal de fraqueza."
+        ],
+        strategies: [
+          "Permitir-se sentir sem autoacusação.",
+          "Manter pequenas rotinas de sono, alimentação e contato social."
+        ],
+        reflections: [
+          "O que esta tristeza protege ou tenta mostrar?",
+          "De que tipo de ajuda real eu precisaria agora?"
+        ]
+      },
+      sadness_low: {
+        displayName: "Tédio",
+        primary: "sadness",
+        type: "primary",
+        ring: "low",
+        definition: "Sensação de vazio leve, desinteresse ou falta de estímulo.",
+        adaptive: "Indicar necessidade de novos desafios ou mudanças de rota.",
+        situations: [
+          "Rotinas muito repetitivas.",
+          "Fases de transição em que o futuro ainda é indefinido."
+        ],
+        risks: [
+          "Buscar apenas distrações automáticas para fugir do tédio.",
+          "Interpretar tédio como prova de incapacidade."
+        ],
+        strategies: [
+          "Explorar pequenas novidades saudáveis na rotina.",
+          "Refletir sobre o que perdeu sentido e o que poderia ganhar vida de novo."
+        ],
+        reflections: [
+          "Que área da minha vida pede renovação?",
+          "O que eu gostava de fazer e abandonei?"
+        ]
+      },
+
+      /* NOJO */
+      disgust_high: {
+        displayName: "Repugnância",
+        primary: "disgust",
+        type: "primary",
+        ring: "high",
+        definition: "Nojo intenso e aversão forte, com desejo de afastamento imediato.",
+        adaptive: "Proteger de situações que violam profundamente seus limites físicos ou morais.",
+        situations: [
+          "Vivências de abuso, humilhação ou violência.",
+          "Contato com atitudes consideradas degradantes."
+        ],
+        risks: [
+          "Estender repugnância para si mesmo, gerando vergonha extrema.",
+          "Fechar qualquer possibilidade de diálogo quando seria útil."
+        ],
+        strategies: [
+          "Distinguir atos específicos de toda a identidade da pessoa.",
+          "Reafirmar limites com apoio profissional quando necessário."
+        ],
+        reflections: [
+          "Que valor essencial está sendo tocado por esta repugnância?",
+          "Como posso me proteger sem me desumanizar?"
+        ]
+      },
+      disgust_mid: {
+        displayName: "Nojo",
+        primary: "disgust",
+        type: "primary",
+        ring: "mid",
+        definition: "Reação de repulsa a algo percebido como contaminante ou ofensivo.",
+        adaptive: "Afastar de ambientes, atitudes ou relações que ferem a integridade.",
+        situations: [
+          "Ambientes fisicamente sujos.",
+          "Comportamentos que vão contra seus princípios básicos."
+        ],
+        risks: [
+          "Transformar nojo em julgamento rígido de grupos inteiros.",
+          "Usar repulsa para justificar desrespeito."
+        ],
+        strategies: [
+          "Diferenciar proteção legítima de preconceito.",
+          "Estabelecer distância saudável de situações realmente tóxicas."
+        ],
+        reflections: [
+          "O que desejo proteger em mim quando sinto nojo?",
+          "Há outra forma de defender meus valores sem desumanizar ninguém?"
+        ]
+      },
+      disgust_low: {
+        displayName: "Aborrecimento",
+        primary: "disgust",
+        type: "primary",
+        ring: "low",
+        definition: "Desgosto leve ou incômodo persistente com algo que não agrada.",
+        adaptive: "Indicar que ajustes podem ser necessários na rotina ou nas relações.",
+        situations: [
+          "Conversas repetitivas que já não fazem sentido.",
+          "Pequenas atitudes que vão contra o que você considera adequado."
+        ],
+        risks: [
+          "Acumular aborrecimento até explodir.",
+          "Descontar irritação em pessoas que não têm relação direta."
+        ],
+        strategies: [
+          "Identificar o que exatamente incomoda.",
+          "Comunicar incômodos cedo, de forma objetiva e respeitosa."
+        ],
+        reflections: [
+          "Esta situação fere valores ou apenas preferências?",
+          "Que ajuste simples poderia reduzir este aborrecimento?"
+        ]
+      },
+
+      /* RAIVA */
+      anger_high: {
+        displayName: "Ira",
+        primary: "anger",
+        type: "primary",
+        ring: "high",
+        definition: "Raiva intensa, com grande energia para confronto.",
+        adaptive: "Proteger limites e reagir a injustiças sérias.",
+        situations: [
+          "Humilhações repetidas.",
+          "Quebra grave de confiança."
+        ],
+        risks: [
+          "Atacar de forma que gere danos irreversíveis.",
+          "Reagir sempre com guerra, mesmo quando não necessário."
+        ],
+        strategies: [
+          "Afastar-se por alguns minutos antes de agir.",
+          "Escrever o que deseja dizer e revisar depois."
+        ],
+        reflections: [
+          "Que limite meu está sendo violado aqui?",
+          "O que eu não quero mais tolerar e como posso comunicar isso?"
+        ]
+      },
+      anger_mid: {
+        displayName: "Raiva",
+        primary: "anger",
+        type: "primary",
+        ring: "mid",
+        definition: "Resposta a frustrações ou injustiças percebidas, com energia de oposição.",
+        adaptive: "Indicar necessidade de defender direitos ou ajustar relações.",
+        situations: [
+          "Críticas injustas.",
+          "Expectativas quebradas sem diálogo."
+        ],
+        risks: [
+          "Transformar qualquer frustração em conflito.",
+          "Engolir raiva por medo de conflitos e adoecer por dentro."
+        ],
+        strategies: [
+          "Nomear a raiva e reconhecer o que ela protege.",
+          "Escolher um momento adequado para conversas difíceis."
+        ],
+        reflections: [
+          "O que esta raiva está tentando proteger em mim?",
+          "Qual seria uma forma firme e respeitosa de agir?"
+        ]
+      },
+      anger_low: {
+        displayName: "Irritação",
+        primary: "anger",
+        type: "primary",
+        ring: "low",
+        definition: "Incômodo diante de pequenas falhas, atrasos ou invasões de espaço.",
+        adaptive: "Sinalizar ajustes necessários na rotina, nos limites e na comunicação.",
+        situations: [
+          "Interrupções constantes em tarefas importantes.",
+          "Descuidos repetidos com combinados simples."
+        ],
+        risks: [
+          "Guardar irritação até explodir por algo pequeno.",
+          "Ignorar sinais de cansaço e sobrecarga."
+        ],
+        strategies: [
+          "Comunicar incômodos cedo, antes de acumular.",
+          "Criar pausas curtas para reduzir tensão física."
+        ],
+        reflections: [
+          "Que pedido claro eu ainda não fiz?",
+          "O que posso ajustar antes que a irritação aumente?"
+        ]
+      },
+
+      /* ANTECIPAÇÃO */
+      anticipation_high: {
+        displayName: "Vigilância",
+        primary: "anticipation",
+        type: "primary",
+        ring: "high",
+        definition: "Estado de alerta elevado, monitorando riscos ou oportunidades o tempo todo.",
+        adaptive: "Proteger em contextos de alta responsabilidade e instabilidade.",
+        situations: [
+          "Cuidar de pessoas vulneráveis em situações críticas.",
+          "Liderar equipes em momentos de crise."
+        ],
+        risks: [
+          "Exaustão por se manter sempre em hiperalerta.",
+          "Dificuldade de relaxar mesmo em ambientes seguros."
+        ],
+        strategies: [
+          "Estabelecer janelas reais de descanso e desligamento.",
+          "Delegar tarefas quando possível, confiando em outras pessoas."
+        ],
+        reflections: [
+          "Em quais momentos posso abaixar a guarda com segurança?",
+          "Que custo tenho pago por me manter sempre vigilante?"
+        ]
+      },
+      anticipation_mid: {
+        displayName: "Antecipação",
+        primary: "anticipation",
+        type: "primary",
+        ring: "mid",
+        definition: "Expectativa ativa em relação ao futuro, com foco em planejamento.",
+        adaptive: "Organizar recursos e preparar-se para próximos passos.",
+        situations: [
+          "Planejar mudanças importantes.",
+          "Preparar apresentações, provas ou projetos relevantes."
+        ],
+        risks: [
+          "Confundir planejamento com controle total.",
+          "Viver tanto no futuro que perde o presente."
+        ],
+        strategies: [
+          "Transformar expectativas em planos escritos e realistas.",
+          "Separar o que é controlável do que não depende de você."
+        ],
+        reflections: [
+          "Minha antecipação está me organizando ou me consumindo?",
+          "Qual pequeno passo posso dar hoje em direção ao que desejo?"
+        ]
+      },
+      anticipation_low: {
+        displayName: "Interesse",
+        primary: "anticipation",
+        type: "primary",
+        ring: "low",
+        definition: "Curiosidade tranquila por algo novo ou diferente.",
+        adaptive: "Estimular exploração, aprendizagem e abertura para possibilidades.",
+        situations: [
+          "Conhecer pessoas e temas novos.",
+          "Iniciar leituras ou projetos por curiosidade."
+        ],
+        risks: [
+          "Espalhar energia em muitos interesses sem aprofundar nenhum.",
+          "Usar apenas novidades para fugir de temas difíceis."
+        ],
+        strategies: [
+          "Escolher poucos focos de interesse por vez.",
+          "Registrar o que desperta curiosidade genuína, não só modas."
+        ],
+        reflections: [
+          "O que este interesse diz sobre quem estou me tornando?",
+          "Que ação pequena posso fazer hoje para honrar essa curiosidade?"
+        ]
+      },
+
+      /* ----------------- DIADES ----------------- */
+      diad_love: {
+        displayName: "Amor",
+        type: "diad",
+        primaries: ["joy", "trust"],
+        definition: "Combinação de alegria e confiança que gera vínculo profundo e cuidado mútuo.",
+        adaptive: "Sustentar relações de apoio, compromisso e pertencimento.",
+        situations: [
+          "Relações nas quais há alegria em estar junto e confiança construída.",
+          "Cuidado consistente em família, amizades e parcerias."
+        ],
+        risks: [
+          "Confundir amor com necessidade de se anular.",
+          "Tolerar desrespeitos em nome de não ficar só."
+        ],
+        strategies: [
+          "Equilibrar entrega com preservação de limites pessoais.",
+          "Comunicar necessidades com honestidade em vez de adivinhar."
+        ],
+        reflections: [
+          "Que tipo de amor quero construir: posse ou parceria?",
+          "Onde posso cuidar de mim sem deixar de cuidar do outro?"
+        ]
+      },
+      diad_submission: {
+        displayName: "Submissão",
+        type: "diad",
+        primaries: ["trust", "fear"],
+        definition: "Mistura de confiança com medo, levando a ceder demais para evitar conflito.",
+        adaptive: "Pode proteger em contextos hierárquicos rígidos ou de risco real.",
+        situations: [
+          "Relações onde uma parte tem muito mais poder.",
+          "Ambientes em que discordar parece perigoso."
+        ],
+        risks: [
+          "Perder a própria voz e identidade.",
+          "Aceitar abusos por medo de desagradar."
+        ],
+        strategies: [
+          "Começar por pequenos gestos de autoafirmação.",
+          "Identificar pessoas seguras para compartilhar dúvidas e limites."
+        ],
+        reflections: [
+          "Em quais áreas tenho dito sempre sim quando queria dizer não?",
+          "Que consequência real temo enfrentar ao me posicionar?"
+        ]
+      },
+      diad_intimidation: {
+        displayName: "Intimidação",
+        type: "diad",
+        primaries: ["fear", "surprise"],
+        definition: "Combinação de medo e surpresa diante de alguém ou situação que impõe poder.",
+        adaptive: "Alertar sobre riscos e ajudar a avaliar limites do outro.",
+        situations: [
+          "Ambientes em que a autoridade é usada de forma hostil.",
+          "Situações em que críticas vêm com humilhação."
+        ],
+        risks: [
+          "Aceitar padrões de violência como normais.",
+          "Silenciar necessidades por sentir-se pequeno demais."
+        ],
+        strategies: [
+          "Buscar apoio externo para avaliar a situação.",
+          "Fortalecer redes de suporte para não enfrentar tudo sozinho."
+        ],
+        reflections: [
+          "Este medo é proporcional ao risco ou à forma como fui tratado no passado?",
+          "Que passos graduais podem reduzir a sensação de ameaça?"
+        ]
+      },
+      diad_disapproval: {
+        displayName: "Desaprovação",
+        type: "diad",
+        primaries: ["surprise", "sadness"],
+        definition: "Mistura de surpresa e tristeza ao perceber algo como errado ou decepcionante.",
+        adaptive: "Rever escolhas, limites e alinhamento com valores.",
+        situations: [
+          "Descobrir comportamentos que vão contra o que você esperava.",
+          "Perceber falhas éticas em pessoas de referência."
+        ],
+        risks: [
+          "Se tornar excessivamente crítico e rígido.",
+          "Usar desaprovação para excluir, não para dialogar."
+        ],
+        strategies: [
+          "Diferenciar pessoa, comportamento e contexto.",
+          "Buscar conversas claras antes de romper vínculos."
+        ],
+        reflections: [
+          "O que exatamente me decepciona aqui?",
+          "Há espaço para reparação ou apenas para afastamento saudável?"
+        ]
+      },
+      diad_remorse: {
+        displayName: "Remorso",
+        type: "diad",
+        primaries: ["sadness", "disgust"],
+        definition: "Tristeza misturada a nojo de si mesmo pelo que fez ou deixou de fazer.",
+        adaptive: "Reconhecer erros, aprender com eles e buscar reparação.",
+        situations: [
+          "Atitudes impulsivas que ferem alguém importante.",
+          "Negligenciar responsabilidades significativas."
+        ],
+        risks: [
+          "Ficar preso em autopunição sem mudança real.",
+          "Tratar-se como irrecuperável."
+        ],
+        strategies: [
+          "Assumir responsabilidade sem se reduzir apenas ao erro.",
+          "Planejar ações concretas de reparação ou mudança."
+        ],
+        reflections: [
+          "O que posso aprender com este erro?",
+          "Que passo real de reparo posso dar, mesmo pequeno?"
+        ]
+      },
+      diad_contempt: {
+        displayName: "Menosprezo",
+        type: "diad",
+        primaries: ["disgust", "anger"],
+        definition: "Nojo misturado com raiva, levando a olhar o outro como inferior.",
+        adaptive: "Proteger-se de relações realmente abusivas quando usado com consciência.",
+        situations: [
+          "Contato repetido com atitudes desrespeitosas.",
+          "Relações marcadas por manipulação e exploração."
+        ],
+        risks: [
+          "Desumanizar pessoas, fechando qualquer ponte de diálogo.",
+          "Projetar no outro aquilo que não tolera em si mesmo."
+        ],
+        strategies: [
+          "Diferenciar afastar-se por proteção de atacar por desprezo.",
+          "Trabalhar em terapia sentimentos de superioridade defensiva."
+        ],
+        reflections: [
+          "Estou me protegendo ou punindo?",
+          "Que vulnerabilidade minha este menosprezo tenta encobrir?"
+        ]
+      },
+      diad_aggressivity: {
+        displayName: "Agressividade",
+        type: "diad",
+        primaries: ["anger", "anticipation"],
+        definition: "Raiva combinada com antecipação, preparando ataques e confrontos constantes.",
+        adaptive: "Pode ser útil para defender direitos em contextos hostis, quando bem dosada.",
+        situations: [
+          "Ambientes competitivos e pouco cooperativos.",
+          "Histórico de precisar se defender sozinho."
+        ],
+        risks: [
+          "Entrar em guerra onde bastaria firmeza.",
+          "Romper relações antes de tentar negociação."
+        ],
+        strategies: [
+          "Avaliar custo-benefício de cada batalha.",
+          "Direcionar energia para ações criativas e não apenas combativas."
+        ],
+        reflections: [
+          "Quais lutas valem realmente meu desgaste?",
+          "Como posso defender meus limites sem me destruir?"
+        ]
+      },
+      diad_optimism: {
+        displayName: "Otimismo",
+        type: "diad",
+        primaries: ["anticipation", "joy"],
+        definition: "Combinação de antecipação e alegria, olhando o futuro com esperança realista.",
+        adaptive: "Sustentar motivação, perseverança e visão de possibilidades.",
+        situations: [
+          "Começo de projetos importantes.",
+          "Processos de recuperação após períodos difíceis."
+        ],
+        risks: [
+          "Desconsiderar riscos concretos em nome de esperança ingênua.",
+          "Culpar-se quando as coisas não saem como esperado."
+        ],
+        strategies: [
+          "Equilibrar entusiasmo com análise realista.",
+          "Rever planos sem abandonar o senso de possibilidade."
+        ],
+        reflections: [
+          "Onde posso ajustar meu plano sem perder a esperança?",
+          "Que evidências sustentam meu otimismo hoje?"
+        ]
+      }
     };
+
+    /* ------------------------------------------------------------------
+       Utilidades
+       ------------------------------------------------------------------ */
 
     function shadeColor(hex, percent) {
       let num = parseInt(hex.replace("#", ""), 16);
@@ -1343,10 +1940,9 @@
       return text.length > max ? text.slice(0, max) + "…" : text;
     }
 
-    function getCssVar(name) {
-      const value = getComputedStyle(document.body).getPropertyValue(name);
-      return (value || "").trim() || "#e5e7eb";
-    }
+    /* ------------------------------------------------------------------
+       Desenho da roda em SVG
+       ------------------------------------------------------------------ */
 
     function buildWheel() {
       const svg = document.getElementById("emotionWheel");
@@ -1419,6 +2015,7 @@
 
       const allSegments = {};
 
+      // Pétalas de intensidade
       PRIMARIES.forEach((primary) => {
         const baseAngle = primary.angle;
         const width = stepAngle * 0.80;
@@ -1475,6 +2072,7 @@
         });
       });
 
+      // Diades
       DIADS.forEach((diad, index) => {
         const primary = PRIMARIES[index];
         const baseAngle = primary.angle + stepAngle / 2;
@@ -1516,6 +2114,10 @@
       window._wheelSegments = allSegments;
     }
 
+    /* ------------------------------------------------------------------
+       Estado
+       ------------------------------------------------------------------ */
+
     let currentEmotionCode = null;
     let currentChart = null;
     const STORAGE_KEY = "plutchik_records_v1";
@@ -1534,6 +2136,10 @@
     function saveRecords(records) {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
     }
+
+    /* ------------------------------------------------------------------
+       Detalhes
+       ------------------------------------------------------------------ */
 
     function handleEmotionSelection(code) {
       const info = INFO_MAP[code];
@@ -1599,6 +2205,10 @@
       document.getElementById("registerButton").disabled = false;
     }
 
+    /* ------------------------------------------------------------------
+       Histórico e gráfico
+       ------------------------------------------------------------------ */
+
     function renderHistory() {
       const tbody = document.getElementById("historyBody");
       const emptyMsg = document.getElementById("historyEmptyMessage");
@@ -1647,20 +2257,13 @@
         "Raiva",
         "Antecipação"
       ];
-      const textColor = getCssVar("--text-main");
-      const accent = getCssVar("--accent") || "#f97316";
-      const accentSoft = getCssVar("--accent-soft") || "rgba(249, 115, 22, 0.5)";
-
       currentChart = new Chart(ctx, {
         type: "bar",
         data: {
           labels,
           datasets: [{
             label: "Registros",
-            data: new Array(labels.length).fill(0),
-            borderWidth: 1,
-            backgroundColor: accentSoft,
-            borderColor: accent
+            data: new Array(labels.length).fill(0)
           }]
         },
         options: {
@@ -1668,11 +2271,11 @@
           maintainAspectRatio: false,
           scales: {
             x: {
-              ticks: { color: textColor },
+              ticks: { color: "var(--text-main)" },
               grid: { display: false }
             },
             y: {
-              ticks: { color: textColor },
+              ticks: { color: "var(--text-main)" },
               grid: { color: "rgba(148, 163, 184, 0.3)" },
               beginAtZero: true,
               precision: 0
@@ -1681,7 +2284,7 @@
           plugins: {
             legend: {
               labels: {
-                color: textColor
+                color: "var(--text-main)"
               }
             }
           }
@@ -1689,27 +2292,6 @@
       });
 
       updateChart();
-    }
-
-    function updateChartColors() {
-      if (!currentChart) return;
-      const textColor = getCssVar("--text-main");
-      const gridColor = document.body.dataset.theme === "light"
-        ? "rgba(148, 163, 184, 0.35)"
-        : "rgba(148, 163, 184, 0.55)";
-
-      currentChart.options.scales.x.ticks.color = textColor;
-      currentChart.options.scales.y.ticks.color = textColor;
-      if (currentChart.options.scales.x.grid) {
-        currentChart.options.scales.x.grid.color = gridColor;
-      }
-      if (currentChart.options.scales.y.grid) {
-        currentChart.options.scales.y.grid.color = gridColor;
-      }
-      if (currentChart.options.plugins && currentChart.options.plugins.legend && currentChart.options.plugins.legend.labels) {
-        currentChart.options.plugins.legend.labels.color = textColor;
-      }
-      currentChart.update();
     }
 
     function updateChart() {
@@ -1748,6 +2330,10 @@
       ];
       currentChart.update();
     }
+
+    /* ------------------------------------------------------------------
+       Registro
+       ------------------------------------------------------------------ */
 
     function handleFormSubmit(event) {
       event.preventDefault();
@@ -1799,7 +2385,11 @@
       alert("Registro salvo localmente com sucesso.");
     }
 
-    function handleDownloadPdf() {
+    /* ------------------------------------------------------------------
+       PDF
+       ------------------------------------------------------------------ */
+
+    async function handleDownloadPdf() {
       if (!currentEmotionCode || !INFO_MAP[currentEmotionCode]) {
         alert("Selecione uma emoção na roda antes de gerar o PDF.");
         return;
@@ -1881,13 +2471,13 @@
       doc.text("Definição:", margin, y);
       y += 5;
       const defWrapped = doc.splitTextToSize(info.definition, 180);
-      doc.text(defWrapped, margin + 4, y, { maxWidth: 180, align: "justify" });
+      doc.text(defWrapped, margin + 4, y);
       y += defWrapped.length * 4 + 3;
 
       doc.text("Função adaptativa:", margin, y);
       y += 5;
       const adapWrapped = doc.splitTextToSize(info.adaptive, 180);
-      doc.text(adapWrapped, margin + 4, y, { maxWidth: 180, align: "justify" });
+      doc.text(adapWrapped, margin + 4, y);
       y += adapWrapped.length * 4 + 4;
 
       doc.setFont("helvetica", "bold");
@@ -1896,7 +2486,7 @@
       doc.setFont("helvetica", "normal");
       const riscosText = (info.risks || []).map(r => "• " + r).join(" ");
       const riscosWrapped = doc.splitTextToSize(riscosText || "–", 180);
-      doc.text(riscosWrapped, margin + 4, y, { maxWidth: 180, align: "justify" });
+      doc.text(riscosWrapped, margin + 4, y);
       y += riscosWrapped.length * 4 + 4;
 
       const tableBody = [
@@ -1935,7 +2525,7 @@
         "Abaixo, há espaço para anotações futuras do paciente e do psicólogo:",
         180
       );
-      doc.text(closingText, margin, finalY, { maxWidth: 180, align: "justify" });
+      doc.text(closingText, margin, finalY);
       finalY += closingText.length * 4 + 4;
 
       for (let i = 0; i < 5; i++) {
@@ -1946,17 +2536,19 @@
       doc.setFontSize(9);
       doc.setFont("helvetica", "italic");
       const footerText = "Richelmy Murta – Psicólogo Clínico. Ferramenta psicoeducativa baseada na Roda das Emoções de Plutchik.";
-      const pageWidth = doc.internal.pageSize.getWidth();
-      const pageHeight = doc.internal.pageSize.getHeight();
-      const footerY = pageHeight - 10;
-      doc.text(footerText, pageWidth / 2, footerY, { align: "center" });
+      doc.text(footerText, margin, 297 - 10);
 
       doc.save("registro-emocional-plutchik.pdf");
     }
 
-    function buildWhatsappSummary() {
+    /* ------------------------------------------------------------------
+       WhatsApp
+       ------------------------------------------------------------------ */
+
+    function handleSendWhatsapp() {
       if (!currentEmotionCode || !INFO_MAP[currentEmotionCode]) {
-        return null;
+        alert("Selecione uma emoção na roda antes de enviar o resumo.");
+        return;
       }
 
       const info = INFO_MAP[currentEmotionCode];
@@ -1982,40 +2574,15 @@
         "Emoção: " + emotionLabel + "\n" +
         "Intensidade percebida: " + userIntensity + "\n" +
         "Resumo do contexto: " + (shortContext || "-") + "\n\n" +
-        "Mensagem gerada pela ferramenta clínica de registro emocional.";
+        "Mensagem enviada automaticamente pela ferramenta clínica de registro emocional.";
 
-      return textPlain;
-    }
-
-    function handleShareWhatsapp() {
-      const textPlain = buildWhatsappSummary();
-      if (!textPlain) {
-        alert("Selecione uma emoção na roda antes de enviar o resumo.");
-        return;
-      }
-      const url = "https://wa.me/?text=" + encodeURIComponent(textPlain);
-      window.open(url, "_blank");
-    }
-
-    function handleSendPsychologistWhatsapp() {
-      const textPlain = buildWhatsappSummary();
-      if (!textPlain) {
-        alert("Selecione uma emoção na roda antes de enviar o resumo ao psicólogo.");
-        return;
-      }
       const url = "https://wa.me/5535984640729?text=" + encodeURIComponent(textPlain);
       window.open(url, "_blank");
     }
 
-    function handleSharePageWhatsapp() {
-      const pageUrl = "https://ricmurtapsicologia.github.io/rodaemo-oes/";
-      const textPlain =
-        "Quero te mostrar esta ferramenta clínica baseada na Roda das Emoções de Plutchik. " +
-        "Ela ajuda a reconhecer, entender e registrar emoções com psicoeducação, gráfico e PDF.\n\n" +
-        "Você pode acessar por aqui: " + pageUrl;
-      const url = "https://wa.me/?text=" + encodeURIComponent(textPlain);
-      window.open(url, "_blank");
-    }
+    /* ------------------------------------------------------------------
+       Tema claro/escuro
+       ------------------------------------------------------------------ */
 
     function applyTheme(theme) {
       const body = document.body;
@@ -2032,7 +2599,6 @@
         label.textContent = "Tema escuro";
       }
       localStorage.setItem("plutchik_theme", theme);
-      updateChartColors();
     }
 
     function initTheme() {
@@ -2050,51 +2616,9 @@
       });
     }
 
-    function showOnboarding() {
-      const overlay = document.getElementById("onboardingOverlay");
-      const startButton = document.getElementById("onboardingStartButton");
-      overlay.hidden = false;
-      overlay.setAttribute("aria-hidden", "false");
-      startButton.focus();
-    }
-
-    function hideOnboarding() {
-      const overlay = document.getElementById("onboardingOverlay");
-      overlay.hidden = true;
-      overlay.setAttribute("aria-hidden", "true");
-    }
-
-    function initOnboarding() {
-      const seen = localStorage.getItem("plutchik_onboarding_seen");
-      const startButton = document.getElementById("onboardingStartButton");
-      const laterButton = document.getElementById("onboardingLaterButton");
-      const howToButton = document.getElementById("howToUseButton");
-      const overlay = document.getElementById("onboardingOverlay");
-
-      if (!seen) {
-        showOnboarding();
-      }
-
-      startButton.addEventListener("click", () => {
-        localStorage.setItem("plutchik_onboarding_seen", "1");
-        hideOnboarding();
-      });
-
-      laterButton.addEventListener("click", () => {
-        hideOnboarding();
-      });
-
-      howToButton.addEventListener("click", (e) => {
-        e.preventDefault();
-        overlay.hidden ? showOnboarding() : hideOnboarding();
-      });
-
-      document.addEventListener("keydown", (ev) => {
-        if (ev.key === "Escape" && !overlay.hidden) {
-          hideOnboarding();
-        }
-      });
-    }
+    /* ------------------------------------------------------------------
+       Inicialização
+       ------------------------------------------------------------------ */
 
     document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("footerYear").textContent = new Date().getFullYear();
@@ -2107,13 +2631,10 @@
       buildWheel();
       renderHistory();
       buildChart();
-      initOnboarding();
 
       document.getElementById("emotionForm").addEventListener("submit", handleFormSubmit);
       document.getElementById("downloadPdfButton").addEventListener("click", handleDownloadPdf);
-      document.getElementById("shareWhatsappButton").addEventListener("click", handleShareWhatsapp);
-      document.getElementById("sendPsychologistWhatsappButton").addEventListener("click", handleSendPsychologistWhatsapp);
-      document.getElementById("sharePageButton").addEventListener("click", handleSharePageWhatsapp);
+      document.getElementById("sendWhatsappButton").addEventListener("click", handleSendWhatsapp);
       document.getElementById("clearHistoryButton").addEventListener("click", () => {
         if (confirm("Deseja realmente apagar todo o histórico deste navegador?")) {
           saveRecords([]);
@@ -2125,4 +2646,5 @@
   </script>
 </body>
 </html>
+
 
