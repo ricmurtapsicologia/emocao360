@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ricmurtapsicologia.github.io/emocao360/sitemap.xml
