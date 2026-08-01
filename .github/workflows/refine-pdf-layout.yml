@@ -1,0 +1,133 @@
+name: Refine Emoção 360 PDF layout
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/refine-pdf-layout.yml']
+permissions:
+  contents: write
+jobs:
+  refine:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply professional PDF layout
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+          css='''@page{size:A4;margin:13mm 14mm 15mm}
+          .print-sheet{display:none}
+          @media print{
+           html,body{background:#fff!important;color:#18302e!important;font-family:Arial,Helvetica,sans-serif!important;font-size:9.6pt;line-height:1.46;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+           .top,nav,.hero,.notice,#como-usar,#mapa,#historico,#sobre,footer,.details-panel,.actions,.privacy-choice,.feedback,.mobile-picker{display:none!important}
+           main{display:block!important}main>section:not(#registro){display:none!important}
+           #registro{display:block!important;margin:0!important;padding:0!important;max-width:none!important;width:auto!important}.shell{display:block!important;border:0!important;box-shadow:none!important;padding:0!important;background:#fff!important}.section-head{display:none!important}
+           .print-sheet{display:block!important;color:#18302e;background:#fff}
+           .print-head{display:grid;grid-template-columns:auto 1fr auto;gap:10mm;align-items:center;padding:0 0 7mm;border-bottom:1.6pt solid #0b5d57}
+           .print-mark{width:14mm;height:14mm;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#0b5d57!important;color:#fff!important;font-weight:900;font-size:9pt;letter-spacing:-.4pt}
+           .print-brand small{display:block;margin:0 0 1.5mm;color:#8a6429!important;text-transform:uppercase;letter-spacing:1.2pt;font-size:6.8pt;font-weight:800}.print-brand h1{margin:0;font-size:19pt;line-height:1.05;letter-spacing:-.35pt;color:#173b37!important}.print-brand p{margin:1.5mm 0 0;color:#5f706e!important;font-size:8.4pt}.print-badge{border:1pt solid #c8d8d4;border-radius:999px;padding:2.1mm 3.8mm;color:#0b5d57!important;font-size:7pt;font-weight:800;letter-spacing:.6pt;text-transform:uppercase;white-space:nowrap}
+           .print-meta{display:grid;grid-template-columns:1.25fr .78fr 1.15fr .72fr;gap:0;margin:7mm 0 6mm;border:1pt solid #dbe5e2;border-radius:4mm;overflow:hidden}.print-meta-item{padding:3mm 3.4mm;background:#f8fbfa!important;border-right:1pt solid #dbe5e2;min-height:16mm}.print-meta-item:last-child{border-right:0}.print-label{display:block;color:#6a7977!important;text-transform:uppercase;letter-spacing:.65pt;font-size:6.6pt;font-weight:800;margin-bottom:1.2mm}.print-value{display:block;color:#18302e!important;font-size:9.3pt;font-weight:700;overflow-wrap:anywhere}
+           .print-section{margin:0 0 4.2mm;border:1pt solid #dbe5e2;border-radius:3.5mm;overflow:hidden;break-inside:auto;background:#fff!important}.print-section-head{display:flex;align-items:center;gap:2.4mm;padding:2.6mm 3.3mm;background:#edf6f4!important;border-bottom:1pt solid #dbe5e2;color:#0b5d57!important;font-size:8pt;font-weight:800;text-transform:uppercase;letter-spacing:.5pt;break-after:avoid}.print-section-num{width:6.2mm;height:6.2mm;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#0b5d57!important;color:#fff!important;font-size:6.7pt}.print-section-body{padding:3.3mm 3.6mm;white-space:pre-wrap;overflow-wrap:anywhere;color:#314a47!important;min-height:10mm}.print-section-body.empty{color:#899693!important;font-style:italic}
+           .print-two{display:grid;grid-template-columns:1fr 1fr;gap:4.2mm;align-items:start}.print-two.stack{grid-template-columns:1fr}.print-two .print-section{margin-bottom:0}
+           .print-reading{margin-top:5.5mm;padding:4mm;border-radius:4mm;background:#fbf6ec!important;border:1pt solid #ead8b8;break-inside:avoid}.print-reading-kicker{color:#8a6429!important;text-transform:uppercase;letter-spacing:.75pt;font-size:6.8pt;font-weight:900}.print-reading h2{margin:1.2mm 0 2mm;font-size:12.5pt;color:#173b37!important}.print-reading-grid{display:grid;grid-template-columns:1fr 1fr;gap:4mm}.print-reading-block{padding-top:2.5mm;border-top:1pt solid #ead8b8}.print-reading-block b{display:block;margin-bottom:1mm;color:#173b37!important;font-size:8pt}.print-reading-block p{margin:0;color:#5e5a50!important;font-size:8.4pt}.print-model-note{margin:3mm 0 0;padding-top:2.5mm;border-top:1pt solid #ead8b8;color:#716b5f!important;font-size:7.6pt}
+           .print-footer{display:grid!important;grid-template-columns:1fr auto;gap:8mm;align-items:end;margin-top:7mm;padding-top:3.5mm;border-top:1pt solid #dbe5e2;color:#6a7977!important;font-size:7pt;break-inside:avoid}.print-footer strong{display:block;color:#173b37!important;font-size:7.6pt}.print-footer-right{text-align:right}.print-footer-right span{display:block}
+           .print-confidential{margin-top:2mm;font-size:6.8pt;color:#7c8886!important}
+           .print-only{display:none!important}
+          }
+          .print-only{display:none}'''
+          s,n=re.subn(r'@media print\{.*?\n\}\n\.print-only\{display:none\}',css,s,count=1,flags=re.S)
+          assert n==1, 'print CSS block not found'
+          marker=''' </div>\n</div></section>\n\n<section id="historico">'''
+          sheet=''' </div>
+           <article class="print-sheet" id="printSheet" aria-hidden="true">
+            <header class="print-head">
+             <div class="print-mark">E360</div>
+             <div class="print-brand"><small>Atlas emocional interativo</small><h1>Registro emocional</h1><p>Organização de uma experiência para reflexão e conversa em psicoterapia.</p></div>
+             <div class="print-badge">Uso psicoeducativo</div>
+            </header>
+            <div class="print-meta">
+             <div class="print-meta-item"><span class="print-label">Nome ou iniciais</span><span class="print-value" id="printIdentity">Não informado</span></div>
+             <div class="print-meta-item"><span class="print-label">Data</span><span class="print-value" id="printDate">—</span></div>
+             <div class="print-meta-item"><span class="print-label">Emoção</span><span class="print-value" id="printEmotion">—</span></div>
+             <div class="print-meta-item"><span class="print-label">Intensidade</span><span class="print-value" id="printIntensity">—</span></div>
+            </div>
+            <section class="print-section"><div class="print-section-head"><span class="print-section-num">1</span>Contexto da experiência</div><div class="print-section-body" id="printContext"></div></section>
+            <div class="print-two" id="printTwo">
+             <section class="print-section"><div class="print-section-head"><span class="print-section-num">2</span>Possíveis ativadores</div><div class="print-section-body" id="printTriggers"></div></section>
+             <section class="print-section"><div class="print-section-head"><span class="print-section-num">3</span>O que fiz ou evitei</div><div class="print-section-body" id="printBehavior"></div></section>
+            </div>
+            <section class="print-section"><div class="print-section-head"><span class="print-section-num">4</span>Resposta mais alinhada a valores</div><div class="print-section-body" id="printDesired"></div></section>
+            <aside class="print-reading" id="printReading">
+             <span class="print-reading-kicker">Leitura psicoeducativa</span><h2 id="printReadingTitle">Sobre a emoção selecionada</h2>
+             <div class="print-reading-grid"><div class="print-reading-block"><b>Como compreender</b><p id="printDefinition">—</p></div><div class="print-reading-block"><b>Possível função</b><p id="printFunction">—</p></div></div>
+             <p class="print-model-note" id="printModelNote">A Roda de Plutchik é utilizada aqui como modelo psicoeducativo. Este registro não é teste psicológico, diagnóstico nem medida validada de gravidade clínica.</p>
+            </aside>
+            <footer class="print-footer">
+             <div><strong>Emoção 360 · Richelmy Murta · Psicólogo clínico</strong><span>Ferramenta psicoeducativa para identificação, compreensão e organização de experiências emocionais.</span><div class="print-confidential">Revise o conteúdo antes de compartilhar. O documento pode conter informações pessoais e emocionais.</div></div>
+             <div class="print-footer-right"><span id="printGenerated">Gerado em —</span><span>ricmurtapsicologia.github.io/emocao360</span></div>
+            </footer>
+           </article>
+          </div></section>
+
+          <section id="historico">'''
+          assert marker in s, 'print sheet insertion point not found'
+          s=s.replace(marker,sheet,1)
+          old='''function printPdf(){
+           if(!document.getElementById("emotionName").value.trim()){feedback("Preencha a emoção antes de abrir a versão para PDF.","err");return}
+           const warn="A versão para impressão pode conter informações pessoais e emocionais. Em dispositivo compartilhado, revise o conteúdo e o local onde o arquivo será salvo. Continuar?";
+           if(confirm(warn))window.print()
+          }'''
+          new='''function setPrintText(id,value,emptyLabel="Não informado"){
+           const el=document.getElementById(id);if(!el)return;const text=String(value??"").trim();el.textContent=text||emptyLabel;el.classList.toggle("empty",!text)
+          }
+          function printReadingData(){
+           if(!currentSelection)return {title:"Emoção nomeada pelo usuário",definition:"A emoção foi registrada com as palavras do usuário, sem associação automática a um setor da roda.",functionText:"Use o rótulo como ponto de partida para explorar contexto, necessidades, valores e padrões em psicoterapia."};
+           if(currentSelection.startsWith("dyad:")){
+            const d=DYADS.find(x=>x.code===currentSelection.split(":")[1]),a=byKey[d.a],b=byKey[d.b];
+            return {title:d.label,definition:d.definition,functionText:`No modelo de Plutchik, esta diade combina ${a.label.toLowerCase()} e ${b.label.toLowerCase()}. Trate essa combinação como hipótese de linguagem, não como classificação definitiva da experiência.`}
+           }
+           const [key,ring]=currentSelection.split(":"),b=byKey[key],degree=ring==="low"?"baixa":ring==="mid"?"média":"alta";
+           return {title:`${b[ring]} · ${b.label}`,definition:b.definition,functionText:`${b.function} A posição escolhida corresponde a uma intensidade qualitativa ${degree} no modelo.`}
+          }
+          function buildPrintSheet(){
+           const r=recordFromForm(),identity=document.getElementById("identity").value.trim(),reading=printReadingData();
+           setPrintText("printIdentity",identity);setPrintText("printDate",r.recordDate?new Date(r.recordDate+"T12:00:00").toLocaleDateString("pt-BR"):"");setPrintText("printEmotion",r.emotionLabel);setPrintText("printIntensity",r.intensity);
+           setPrintText("printContext",r.context,"Não preenchido");setPrintText("printTriggers",r.triggers,"Não preenchido");setPrintText("printBehavior",r.behavior,"Não preenchido");setPrintText("printDesired",r.desired,"Não preenchido");
+           const printTwo=document.getElementById("printTwo");if(printTwo)printTwo.classList.toggle("stack",(r.triggers.length+r.behavior.length)>620);
+           setPrintText("printReadingTitle",reading.title);setPrintText("printDefinition",reading.definition);setPrintText("printFunction",reading.functionText);
+           const now=new Date(),date=now.toLocaleDateString("pt-BR"),time=now.toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});setPrintText("printGenerated",`Gerado em ${date}, às ${time}`);
+          }
+          function printPdf(){
+           if(!document.getElementById("emotionName").value.trim()){feedback("Preencha a emoção antes de abrir a versão para PDF.","err");return}
+           buildPrintSheet();
+           const warn="A versão para impressão pode conter informações pessoais e emocionais. Em dispositivo compartilhado, revise o conteúdo e o local onde o arquivo será salvo. Continuar?";
+           if(confirm(warn))window.print()
+          }'''
+          assert old in s, 'printPdf block not found'
+          s=s.replace(old,new,1)
+          anchor=''' const saved=localStorage.getItem("emocao360_theme");if(saved==="dark")document.body.dataset.theme="dark";'''
+          assert anchor in s, 'init anchor not found'
+          s=s.replace(anchor,' window.addEventListener("beforeprint",buildPrintSheet);\n'+anchor,1)
+          assert s.count('id="printSheet"')==1
+          assert 'print-two stack' not in s
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Validate and commit
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          s=Path('index.html').read_text(encoding='utf-8')
+          for token in ['@page{size:A4','id="printSheet"','function buildPrintSheet()','class="print-footer"']:
+              assert token in s, token
+          print('PDF layout validation passed')
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          rm .github/workflows/refine-pdf-layout.yml
+          git add index.html .github/workflows/refine-pdf-layout.yml
+          git commit -m "Refine Emoção 360 PDF layout"
+          git push
