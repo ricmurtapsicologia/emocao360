@@ -1,0 +1,37 @@
+name: Wave 5 isolated regression
+on:
+  push:
+    branches:
+      - audit/onda4-extracao-js-20261015
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  isolated-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Byte parity and JS syntax
+        run: node --test tests/onda4-paridade.test.mjs
+      - name: Install browser only for this job
+        run: |
+          npm install --no-save --no-package-lock --ignore-scripts playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Prepare original and branch as offline local sites
+        run: |
+          mkdir -p "$RUNNER_TEMP/wave5/main" "$RUNNER_TEMP/wave5/branch"
+          git archive origin/main | tar -x -C "$RUNNER_TEMP/wave5/main"
+          git archive HEAD | tar -x -C "$RUNNER_TEMP/wave5/branch"
+          python3 -m http.server 8765 --bind 127.0.0.1 --directory "$RUNNER_TEMP/wave5" >/tmp/wave5-http.log 2>&1 &
+          sleep 2
+      - name: Browser smoke/E2E versus original
+        run: node tests/onda5-smoke-e2e.mjs
