@@ -3,8 +3,9 @@ import { chromium } from 'playwright';
 
 const origin = 'http://127.0.0.1:8765';
 const browser = await chromium.launch({ headless: true });
-async function inspect(stage) {
-  const context = await browser.newContext({ serviceWorkers: 'block' });
+async function inspect(stage, profile) {
+  const mobile = profile === 'mobile';
+  const context = await browser.newContext({serviceWorkers:'block',viewport:mobile?{width:390,height:844}:{width:1280,height:900},isMobile:mobile,hasTouch:mobile,deviceScaleFactor:mobile?2:1});
   await context.route('**/*', route => {
     const url = new URL(route.request().url());
     if (url.origin === origin) return route.continue();
@@ -33,7 +34,8 @@ async function inspect(stage) {
       buttonLabels: texts('button'),
       labelTexts: texts('label').slice(0, 120),
       linkCount: document.querySelectorAll('a[href]').length,
-      visibleTextSample: tidy(document.body?.innerText).slice(0, 2500)
+      visibleTextSample: tidy(document.body?.innerText).slice(0, 2500),
+      horizontalOverflow: document.documentElement.scrollWidth > window.innerWidth + 2
     };
   });
   const themeLocator = page.locator('#themeToggle, #themeSwitch, #themeBtn, [data-theme-toggle]').first();
@@ -51,13 +53,15 @@ async function inspect(stage) {
   return { ui, errors: errors.sort(), theme, extractedScriptOK };
 }
 try {
-  const before = await inspect('main');
-  const after = await inspect('branch');
-  assert.ok(after.extractedScriptOK, 'extracted app.js did not load');
-  assert.deepEqual(after.ui, before.ui, 'UI changed compared with main');
-  assert.deepEqual(after.errors, before.errors, 'new JavaScript errors versus main');
-  assert.deepEqual(after.theme, before.theme, 'theme interaction changed');
-  console.log('PASS: browser E2E baseline parity, blocked external traffic, script load and theme smoke');
+  for (const profile of ['desktop', 'mobile']) {
+    const before = await inspect('main', profile);
+    const after = await inspect('branch', profile);
+    assert.ok(after.extractedScriptOK, profile + ': extracted JavaScript did not load');
+    assert.deepEqual(after.ui, before.ui, profile + ': UI regression');
+    assert.deepEqual(after.errors, before.errors, profile + ': new JavaScript error');
+    assert.deepEqual(after.theme, before.theme, profile + ': theme interaction regression');
+    console.log('PASS: ' + profile + ' baseline/branch E2E; external requests blocked');
+  }
 } finally {
   await browser.close();
 }
