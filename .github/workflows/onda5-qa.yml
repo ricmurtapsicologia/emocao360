@@ -22,6 +22,8 @@ jobs:
           node-version: '22'
       - name: Byte parity and JS syntax
         run: node --test tests/onda4-paridade.test.mjs
+      - name: Auditoria de preservação 30 de 30
+        run: node --test tests/onda5-auditoria-30.test.mjs
       - name: Install browser only for this job
         run: |
           npm install --no-save --no-package-lock --ignore-scripts playwright@1.55.0
